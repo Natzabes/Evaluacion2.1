@@ -32,9 +32,25 @@ function addStudentToTable(student){
     row.innerHTML=
     `<td>${student.name}</td>
      <td>${student.lastName}</td>
-    <td>${student.grade}</td>`;
+    <td>${student.grade}</td>
+    <td></td>
+    <td><button class="delete">Eliminar</button> <button class="edit">Editar</button></td>
+    `;
+ row.querySelector(".delete").addEventListener("click",function(){
+    deleteEstudiante(student,row);
+ });
    tableBody.appendChild(row);
 }
+
+function deleteEstudiante(student,row){
+    //Buscar el estudiante por el array
+    const index=students.indexOf(student);
+    if(index > -1){
+        students.splice(index,1);
+        row.remove();
+        calcularPromedio();
+    }
+ };
 
 function calcularPromedio(){
     if(students.length===0){
