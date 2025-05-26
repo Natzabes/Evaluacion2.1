@@ -6,16 +6,16 @@ const form = document.getElementById("studentForm");
 const editBtn = document.getElementById("form-edit");
 let estaEnModoEditar = false;
 
-function calcularPromedio(){
-    if(students.length===0){
-       spanAverage.textContent="N/A"
-        return;
+function calcularPromedio() {
+    if (students.length === 0) return spanAverage.textContent = `No Disponible`;
+    if (students.length === 1) return spanAverage.textContent = `${students[0].grade}`;
+    let average = 0
+    
+    for (let i = 0; i < students.length; i++) {
+        average += Math.floor(students[i].grade * 100) * 0.01;
     }
-    const total=students.reduce((sum,s)=>sum+s.grade,0);
-    console.log(total)
-    const average=total/students.length;
-    console.log(average)
-    spanAverage.textContent= average.toFixed(2);
+    average = average / students.length;
+    return average.toFixed(1);
 }
 
 function actualizarDisplayPromedio() {
@@ -37,10 +37,9 @@ function formSubmit(e) {
     const name = document.getElementById("name").value.trim();
     const lastName = document.getElementById("lastName").value.trim();
     const grade = document.getElementById("grade").value.trim();
-    const date = document.getElementById("date").value.trim();
     form.reset();
 
-    const student = {name, lastName, grade, date};
+    const student = {name, lastName, grade};
     students.push(student);
     actualizarDisplayPromedio();
     addStudentToTable(student);
@@ -99,7 +98,6 @@ function addStudentToTable(student) {
         <td class="colDato">${student.name}</td>
         <td class="colDato">${student.lastName}</td>
         <td class="colDato">${student.grade}</td>
-        <td class="colDato">${student.date}</td>
         <td class="colAcciones">
             <button class="btn btn-danger mb-1 delete">Eliminar</button>
             <div class="container column text-center div_edit">
@@ -124,7 +122,6 @@ function addStudentToTable(student) {
         inputs[0].value = student.name
         inputs[1].value = student.lastName
         inputs[2].value = student.grade
-        inputs[3].value = student.date
         
         form.onsubmit = function(e) {
             e.preventDefault();
@@ -132,13 +129,11 @@ function addStudentToTable(student) {
             student.name = inputs[0].value.trim();
             student.lastName = inputs[1].value.trim();
             student.grade = inputs[2].value.trim();
-            student.date = inputs[3].value.trim();
 
             const cols = encontrarFilaSelec().querySelectorAll(".colDato");
             cols[0].textContent = `${student.name}`;
             cols[1].textContent = `${student.lastName}`;
             cols[2].textContent = `${student.grade}`;
-            cols[3].textContent = `${student.date}`;
 
             actualizarDisplayPromedio();
             estaEnModoEditar = false;

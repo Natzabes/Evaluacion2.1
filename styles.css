@@ -47,28 +47,6 @@ th {
     background-color: rgb(240, 240, 240);
 }
 
-.colAcciones {
-    display: flex;
-    width: auto;
-    height: auto;
-    justify-content: space-around;
-    align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0);
-}
-
-.colAcciones button {
-    margin: 1px;
-}
-
-.div_edit {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
 @media screen and (max-width: 768px) {
     h1 {
         font-size: 1.5em;
@@ -112,4 +90,25 @@ th {
     th, td {
         width: 20%;
     }
+}
+.colAcciones {
+    display: flex;
+    width: auto;
+    height: auto;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.colAcciones button {
+    margin: 1px;
+}
+
+.div_edit {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
