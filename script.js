@@ -6,16 +6,16 @@ const form = document.getElementById("studentForm");
 const editBtn = document.getElementById("form-edit");
 let estaEnModoEditar = false;
 
-function calcularPromedio() {
-    if (students.length === 0) return spanAverage.textContent = `No Disponible`;
-    if (students.length === 1) return spanAverage.textContent = `${students[0].grade}`;
-    let average = 0
-    
-    for (let i = 0; i < students.length; i++) {
-        average += Math.floor(students[i].grade * 100) * 0.01;
+function calcularPromedio(){
+    if(students.length===0){
+       spanAverage.textContent="N/A"
+        return;
     }
-    average = average / students.length;
-    return average.toFixed(1);
+    const total=students.reduce((sum,s)=>sum+s.grade,0);
+    console.log(total)
+    const average=total/students.length;
+    console.log(average)
+    spanAverage.textContent= average.toFixed(2);
 }
 
 function actualizarDisplayPromedio() {
