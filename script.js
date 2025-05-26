@@ -1,25 +1,38 @@
 const students = [];
 
 const spanAverage = document.getElementById("average-grade");
+const totalTabla = document.getElementById("total");
+const toApru = document.getElementById("aprueba");
+const toRepru = document.getElementById("reprueba");
 const tableBody = document.querySelector("#studentsTable tbody")
 const form = document.getElementById("studentForm");
 const editBtn = document.getElementById("form-edit");
 let estaEnModoEditar = false;
 
 function calcularPromedio() {
+    totalTabla.textContent = students.length;
+    toApru.textContent = 0
+    toRepru.textContent = 0
+    
     if (students.length === 0) return spanAverage.textContent = `No Disponible`;
-    if (students.length === 1) return spanAverage.textContent = `${students[0].grade}`;
+    if (students.length === 1){
+        if (parseInt(students[0].grade) < 4.0) {
+            toRepru.textContent = 1 
+        }
+        else toApru.textContent = 1
+        return spanAverage.textContent = `${students[0].grade}`;
+    } 
     let average = 0
     
     for (let i = 0; i < students.length; i++) {
+        if (parseInt(students[i].grade) < 4.0) {
+            toRepru.textContent = parseInt(toRepru.textContent) + 1
+        }
+        else toApru.textContent = parseInt(toApru.textContent) + 1
         average += Math.floor(students[i].grade * 100) * 0.01;
     }
     average = average / students.length;
-    return average.toFixed(1);
-}
-
-function actualizarDisplayPromedio() {
-    spanAverage.textContent = calcularPromedio();
+    spanAverage.textContent =  average.toFixed(1);
 }
 
 function encontrarFilaSelec() {
@@ -38,10 +51,10 @@ function formSubmit(e) {
     const lastName = document.getElementById("lastName").value.trim();
     const grade = document.getElementById("grade").value.trim();
     form.reset();
-
+    //guardar datos en el Array nuevo
     const student = {name, lastName, grade};
     students.push(student);
-    actualizarDisplayPromedio();
+    calcularPromedio();
     addStudentToTable(student);
 }
 form.onsubmit = formSubmit;
@@ -83,11 +96,12 @@ editBtn.addEventListener("click", (e) => {
 })
 
 function eliminarEstudiante(student, row) {
+    //Buscar el estudiante por el array
     const index = students.indexOf(student, row);
     if(index > -1) {
         students.splice(index, 1);
         row.remove();
-        actualizarDisplayPromedio();
+        calcularPromedio();
     }
 }
 
@@ -135,7 +149,7 @@ function addStudentToTable(student) {
             cols[1].textContent = `${student.lastName}`;
             cols[2].textContent = `${student.grade}`;
 
-            actualizarDisplayPromedio();
+            calcularPromedio();
             estaEnModoEditar = false;
             cambiarEstiloForm();
         }

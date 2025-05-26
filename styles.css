@@ -14,7 +14,7 @@ h1 {
     text-align: center;
 }
 
-#average {
+#average, #stats {
     width: 600px;
     text-align: center;
     padding: 12px;
@@ -51,7 +51,7 @@ th {
     h1 {
         font-size: 1.5em;
     }
-    #average {
+    #average, #stats {
         width: 400px;
         font-size: 1rem;
         margin-bottom: 0px;
@@ -79,7 +79,7 @@ th {
 }
 
 @media screen and (max-width: 400px) {
-    #average {
+    #average, #stats {
         width: 320px;
         font-size: 0.8rem;
         margin-bottom: 0px;
