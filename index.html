@@ -39,24 +39,30 @@
                 <label for="grade" class="form-label bold">Nota (1.0 - 7.0):</label>
                 <input type="number" class="form-control mx-auto" id="grade" step="0.1" min="1.0" max="7.0" placeholder="1.0" required oninvalid="this.setCustomValidity('Ingrese número entre 1-7.')" oninput="this.setCustomValidity('')">
             </div>
-            <button type="submit" class="btn btn-primary rounded mt-2">Guardar Estudiante</button>
+            <div class="mb-2 fw-bold">
+                <label for="date" class="form-label bold">Fecha:</label>
+                <input type="date" class="form-control mx-auto" id="date" required oninvalid="this.setCustomValidity('Ingrese fecha válida.')" oninput="this.setCustomValidity('')">
+            </div>
+            <button id="form-btn" type="submit" class="btn btn-primary rounded mt-2">Guardar Estudiante</button>
+            <button id="form-edit" type="button" class="btn btn-secondary rounded mt-2">Modo Edición</button>
         </form>
     </div>
     
 <table id="studentsTable" border=1 cellpadding="8" cellspacing="0">
-<thead>
-    <tr>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Nota</th>
-        <th>Fecha</th>
-        <th>Accion</th>
-    </tr>
-</thead>
-<tbody>
-        <!--Filas de datos -->
-</tbody>
-</table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Nota</th>
+                <th>Fecha</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Filas de datos -->
+        </tbody>
+    </table>
+    
     <script src="script.js"></script>
 </body>
 </html>
